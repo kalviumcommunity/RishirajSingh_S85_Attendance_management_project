@@ -1,5 +1,8 @@
 package com.school;
 
 public class Main {
-  
+    public static void main(String[] args) {
+        System.out.println("Welcome to the School Management System!");
+        // Additional code for the school management system can be added here
+    }
 }
