@@ -1,21 +1,25 @@
 package com.school;
 
-public class Staff extends Person {
-    private String role; // e.g., "Librarian", "Administrator"
+public class Staff extends Person implements Storable {
+    private String department;
 
-    public Staff(String name, String role) {
-        super(name); // Calls Person constructor
-        this.role = role;
+    public Staff(String name, String department) {
+        super(name);
+        this.department = department;
     }
 
-    // Getter for role (optional for now)
-    public String getRole() {
-        return role;
+    public String getDepartment() {
+        return department;
     }
 
     @Override
     public void displayDetails() {
         super.displayDetails();
-        System.out.println(", Role: " + role + " (Role: Non-Teaching Staff)");
+        System.out.println(", Department: " + department + " (Role: Staff)");
+    }
+
+    @Override
+    public String toDataString() {
+        return getId() + "," + getName() + "," + department;
     }
 }
