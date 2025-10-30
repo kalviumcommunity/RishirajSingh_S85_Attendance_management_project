@@ -35,8 +35,8 @@ public class RegistrationService {
         return st;
     }
 
-    public Course createCourse(String courseName) {
-        Course c = new Course(courseName);
+    public Course createCourse(String courseName, int capacity) {
+        Course c = new Course(courseName, capacity);
         courses.add(c);
         return c;
     }
@@ -60,6 +60,22 @@ public class RegistrationService {
             if (c.getCourseId() == id) return c;
         }
         return null;
+    }
+
+    // Enrollment handling
+    public boolean enrollStudentInCourse(Student student, Course course) {
+        if (student == null || course == null) {
+            System.out.println("❌ Invalid student or course for enrollment.");
+            return false;
+        }
+        boolean added = course.addStudent(student);
+        if (added) {
+            System.out.println("✅ Enrolled " + student.getName() + " in " + course.getCourseName());
+        } else {
+            System.out.println("⚠️ Could not enroll " + student.getName() + " in " + course.getCourseName() +
+                    " (capacity reached or already enrolled)");
+        }
+        return added;
     }
 
     // Aggregation

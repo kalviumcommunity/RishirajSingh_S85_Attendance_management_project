@@ -33,11 +33,23 @@ public class Main {
 
         displaySchoolDirectory(regService);
 
-        // --- Course Setup via RegistrationService ---
-        Course course1 = regService.createCourse("Intro to Quantum Physics");
-        Course course2 = regService.createCourse("Advanced Algorithms");
+    // --- Course Setup via RegistrationService (with capacity) ---
+    Course course1 = regService.createCourse("Intro to Quantum Physics", 1);
+    Course course2 = regService.createCourse("Advanced Algorithms", 2);
 
         System.out.println("\n\n--- Available Courses ---");
+        for (Course c : regService.getCourses()) {
+            c.displayDetails();
+        }
+
+        // --- Enrollments and Capacity Management ---
+        System.out.println("\n\n--- Enrolling Students in Courses (Capacity Management) ---");
+        regService.enrollStudentInCourse(student1, course1); // should succeed
+        regService.enrollStudentInCourse(student2, course1); // should fail (capacity 1)
+        regService.enrollStudentInCourse(student1, course2); // succeed
+        regService.enrollStudentInCourse(student2, course2); // succeed
+
+        System.out.println("\n\n--- Course Details After Enrollment ---");
         for (Course c : regService.getCourses()) {
             c.displayDetails();
         }
